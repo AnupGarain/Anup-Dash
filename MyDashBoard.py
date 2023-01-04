@@ -66,10 +66,10 @@ app.layout=dbc.Container([
     ]),
     dbc.Row([
         dbc.Col([
-            country_drop := dcc.Dropdown([x for x in sorted(df.country.unique())], multi=True,placeholder='Filter by Country')
+            dcc.Dropdown([x for x in sorted(df.country.unique())], multi=True,placeholder='Filter by Country',id='country_drop')
         ], width=3),
         dbc.Col([
-            continent_drop := dcc.Dropdown([x for x in sorted(df.continent.unique())],placeholder='Filter by Continent')
+            dcc.Dropdown([x for x in sorted(df.continent.unique())],placeholder='Filter by Continent',id='continent_drop')
         ], width=3)]),
     dbc.Row([
         dash_table.DataTable(
@@ -110,8 +110,8 @@ def barGraph(countryName):
 
 @app.callback(
     Output('dataTable','data'),
-    Input(continent_drop,'value'),
-    Input(country_drop,'value')
+    Input(component_id='continent_drop',component_property='value'),
+    Input(component_id='country_drop',component_property='value')
 
 )
 def updatDataTable(continentData,countryData):
