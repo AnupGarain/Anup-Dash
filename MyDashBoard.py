@@ -4,6 +4,7 @@ import pandas as pd
 import plotly.express as px
 
 app=Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
+server=app.server
 
 df=px.data.gapminder()
 topPopulation=df.groupby('country')['pop'].sum().nlargest(3).reset_index()
